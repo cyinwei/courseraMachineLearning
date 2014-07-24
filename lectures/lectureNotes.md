@@ -1,3 +1,4 @@
+<!-- picture sources -->
 #Stanford | Andrew Ng | Machine Learning
 ## Lecture Notes
 Motivation:  For Will Johnson's peak detection algorithm on Interspec.
@@ -75,22 +76,56 @@ Other terms, but we spend most of our time on the two types above
 We start with am example, then get to the definition (deductive reasoning).
 
 ####Example: Housing price prediction
-insert price vs size
+![price vs size of a house][1]
 
 There are different ways to fit the data.  Do we choose a linear fit?  Quadratic fit?  Or higher exponents?  When we fit 
 
-So supervised learning is when the _right answers_ are given.  This is also called **regression problem**.
-
->**Regression**: predicting a continuous output value.
->**Supervised learning**: where the right answers are given
-
+So supervised learning is when the _right answers_ are given.  This is also called **regression problem**, where our algorithm tries to give a continuous output..
 
 ####Example: Breast cancer detection
+![breast cancer prediction][2]
 
-This is a classification problem.  
+This is a **classification problem**, where we try and classify, or map the output to a discrete value.
 
+Of course, for both classification and regression, our algorithm, or function can take in more than one dimension.  Generally, the more dimension, feature, or attributes, the more accurate our algorithm will be.  See below.  For some problems, we would want an infinite number of dimensions for our algorithm.  We can use something called a _support vector machine_ that uses a neat math trick (something like storing data in higher dimensions to make them curvy?) that can do that.
 
+![breast cancer prediction in 2d and more][3]
 
+**Terms**
 
-  
-  
+>**Supervised learning**
+>:  Category of machine learning where the answers for each data point are given, and the machine creates an algorithm to predict certain output for a given input.
+
+>   **Regression**
+>       :  Supervised learning predicting a **_continuous_** output value.
+
+>   **Classification**
+>       :  Supervised learning predicting a **_discrete_** output value.
+
+----
+##Unsupervised Learning
+We talked about supervised learning, where each data point is labeled, and told explicitly what is "right" or not.  It looks like this.
+
+![example of supervised learning][4]
+
+As you can see, the data is marked Os and Xs; they are labeled; an answer is already given for the data.  This is what unsupervised learning is.
+
+![example of unsupervised learning][5]
+
+Here, the data is not labeled, we don't give the machine any answers at all.  We're not told what do to with the data.  So with unsupervised learning, we're given _unbiased data_, and the machine will try and find **some structure, some pattern** to the data.  The example above is a **clustering algorithm**, as the machine will group the data into two big clusters.
+
+###Example: Google News
+Google news takes all sorts of web news, and clusters them together.  That way, the user gets a whole variety of different sources and articles grouped by a common topic.  
+
+![google news clustering example][6]
+
+As you can see, Google news's clustering algorithm find a group of news articles relating to the BP oil spill, and puts them together for the user to read.
+
+###Example: DNA 
+
+  [1]: https://lh5.googleusercontent.com/-xsTSv1cDLDc/U9BkOi7auKI/AAAAAAAAAJo/vp2mpLloPW4/s0/%25255BWeek%2525201%25255D%25255BSupervised%252520Learning%25255D%252520H
+  [2]: https://lh6.googleusercontent.com/-AM3LqlGcF4g/U9BpYk_P54I/AAAAAAAAAKI/Zr_m8LviA8A/s0/%25255BWeek%2525201%25255D%25255BSupervised%252520Learning%25255D%252520Breast%252520cancer%252520prediction.png
+  [3]: https://lh4.googleusercontent.com/-wgJnsnFYM_M/U9BrlnyVWMI/AAAAAAAAAKQ/tU85hYmCbAk/s0/%25255BWeek%2525202%25255D%25255BSupervised%252520Learning%25255D%252520Breast%252520cancer%252520prediction%25252C%2525202%252520dimensions.png
+  [4]: https://lh6.googleusercontent.com/-ACvtRg3Yjt8/U9BuiA8hX6I/AAAAAAAAAKc/Yqec7ursfiQ/s0/%25255BWeek%2525201%25255D%25255BUnsupervised%252520Learning%25255D%252520Supervised%252520learning%252520example.png
+  [5]: https://lh4.googleusercontent.com/-CY6Q_ZfOIO0/U9BvPi5R0BI/AAAAAAAAAKk/VC7gG0RB6jk/s0/%25255BWeek%2525201%25255D%25255BUnsupervised%252520Learning%25255D%252520Unsupervised%252520learning%252520example.png
+  [6]: https://lh6.googleusercontent.com/-IY4Br9L5b08/U9Bw5VBcY2I/AAAAAAAAAKw/CDamiB31PLQ/s0/%25255BWeek%2525202%25255D%25255BUnsupervised%252520Learning%25255D%252520Google%252520news%252520clustering%252520example.png 
