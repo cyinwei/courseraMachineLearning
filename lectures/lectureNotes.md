@@ -103,7 +103,7 @@ Of course, for both classification and regression, our algorithm, or function ca
 >       :  Supervised learning predicting a **_discrete_** output value.
 
 ----
-##Unsupervised Learning
+###Unsupervised Learning
 We talked about supervised learning, where each data point is labeled, and told explicitly what is "right" or not.  It looks like this.
 
 ![example of supervised learning][4]
@@ -114,15 +114,15 @@ As you can see, the data is marked Os and Xs; they are labeled; an answer is alr
 
 Here, the data is not labeled, we don't give the machine any answers at all.  We're not told what do to with the data.  So with unsupervised learning, we're given _unbiased data_, and the machine will try and find **some structure, some pattern** to the data.  The example above is a **clustering algorithm**, as the machine will group the data into two big clusters.
 
-###Clustering
-####Example: Google News
+####Clustering
+#####Example: Google News
 Google news takes all sorts of web news, and clusters them together.  That way, the user gets a whole variety of different sources and articles grouped by a common topic.  
 
 ![google news clustering example][6]
 
 As you can see, Google news's clustering algorithm find a group of news articles relating to the BP oil spill, and puts them together for the user to read.
 
-####Example: DNA 
+#####Example: DNA 
 Clustering is also useful for DNA analysis.
 
 ![DNA clustering example][7]
@@ -130,7 +130,7 @@ Source: Su-In Lee, Dana Pe'er, Aimee Dudley, George Church, Daphne Koller
 
 We don't know anything about the structure of the genes, so we use a clustering algorithm to group and categorize and find structure for the individuals, as shown by the colors.
 
-####Other Examples
+#####Other Examples
 ![Other clustering examples][8]
 
 We can use clustering algorithms to better understand, or optimize other problems with a complex amount of data.
@@ -142,20 +142,20 @@ We can use clustering algorithms to better understand, or optimize other problem
 
 All these are examples of the uses of the clustering algorithm, which is just **_one_** type of unsupervised learning.  Another example is the **cocktail party problem**.
 
-###Cocktail party problem
+####Cocktail party problem
 In a party, we have two different hearing inputs (2 different microphones) at different locations.  Let's say we have two different speakers, talking.  How do we separate the people talking?  Note we have to specify how many audio sources we have for the algorithm to work.
 
 ![cocktail party problem][9]
 
-####Example: two people counting to ten, one in spanish, one in english
+#####Example: two people counting to ten, one in spanish, one in english
 With the algorithm, we can clearly hear the english and spanish voices separated in two different outputs.
 
-####Example: radio music and a person counting to ten in english
+#####Example: radio music and a person counting to ten in english
 With the algorithm, we can almost fully get the music, almost _almost_ filter out the music on the second output.
 
 Source for audio: Te-Won Lee
 
-####The algorithm itself
+#####The algorithm itself
 Surprisingly, the algorithm is actually just one line of `Octave` code:
 ```matlab
 [W,s,v] = svd((repmat(sum(x.*x,1),size(x,1),1).*x)*x');
@@ -164,7 +164,7 @@ Source: Sam Roweis, Yair Weiss & Eero Simoncelli
 
 Note that `svd` and `repmat` are built in Octave linear algebra functions.
 
-###Why choose Octave?
+####Why choose Octave?
 We learn much faster with Octave because we don't have link lots of C++ or Java libraries to find these linear algebra functions.
 
 In real life, we often prototype the functions in an "easy" language like Matlab or Octave, then implement the algorithm in C++ or Java for speed and wrapping purposes.
@@ -183,8 +183,47 @@ Linear regression is fitting a straight (linear) line that "best fits" the data.
 
 This fits in with supervised machine learning, because we give the machine some set of training data, let the machine train itself (in this case, by defining a fit function), and now expect the machine to give answer for *any* input.
 
-#####Notation
-One way of 
+####Notation of Training Sets
+![Housing price notation][11]
+
+The training data allows our regression to produce a "accurate" function that takes in any input and gives an "accurate" output.  
+
+Here our training data size is $m$.  Our inputs, field, or features, are $x$.  Our outputs, targets are $y$.  We can refer to a specific training example as $(x,y)$.  
+
+####How does a supervised learning algorithm work?
+
+In general, we feed a training set to a learning algorithm, which gives a _hypothesis_ output.  We choose linear regression, or more specifically, univariate linear regression because it relatively easy, and acts as a building block for us to understand supervised learning.
+
+```
+Univariate linear regression
+:   Univariate      => 1 variable
+:   Linear          => straight line, $y=\theta_0 +\theta_1 * x$
+:   Regression      => process of estimating the output via input by producing a function (called the hypothesis)
+```
+![how a supervised learning algorithm works + univariate linear regression][12]
+
+----
+
+##Cost Function
+Recall our hypothesis function:
+
+> $h_\theta (x) = \theta_0 + \theta_1 x$
+
+So the only variables we can change is $\theta_0 $ and $\theta_1$, since we let the user input $x$, and $h$ is the output.
+So how do we choose the values of $\theta_i$ that best "fits", or most accurate solves the problem?  With something called a *cost function*.
+
+####Examples 
+![linear functions with respect to theta 1 and theta 2][13]
+
+####Idea: Choose our $\theta_i$ so that our $h_\theta(x)$ is close to our training examples $(x,y)$
+The most popular way in statistics is: the method of least squares.  The function looks like:
+>  minimize $\theta_0, \theta_1$ for $\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^i) - y^i)^2$
+
+> where $J(\theta_0, \theta_1) =\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^i) - y^i)^2=  $ cost function
+
+This is our **cost function**, this method is known as the squared error.  There are also other cost functions (like absolute value error...), too.
+#####Motivations:
+
 
 
   [1]: https://lh5.googleusercontent.com/-xsTSv1cDLDc/U9BkOi7auKI/AAAAAAAAAJo/vp2mpLloPW4/s0/%25255BWeek%2525201%25255D%25255BSupervised%252520Learning%25255D%252520H
@@ -196,4 +235,7 @@ One way of
   [7]: https://lh6.googleusercontent.com/-ph8MgNfy-4Y/U9LTu1XUk8I/AAAAAAAAALA/RWJVsQAv5kM/s0/%25255BWeek%2525202%25255D%25255BUnsupervised%252520Learning%25255D%252520DNA%252520clustering.png
   [8]: https://lh5.googleusercontent.com/-jVczsrla9Ro/U9LU2Iqqo7I/AAAAAAAAALI/eMfPWTeYP38/s0/%25255BWeek%2525202%25255D%25255BUnsupervised%252520Learning%25255D%252520Other%252520clustering%252520examples.png
   [9]: https://lh4.googleusercontent.com/-d4Smy59LzKA/U9LW-kJ_hmI/AAAAAAAAALU/qMlWPnP0phY/s0/%25255BWeek%2525202%25255D%25255BUnsupervised%252520Learning%25255D%252520Cocktail%252520party%252520problem.png
-  [10]: https://lh6.googleusercontent.com/-gSODDORlRdU/U9LqlbJuVkI/AAAAAAAAALk/VzL4mEl_64g/s0/%25255B2%25255D%25255BModel%252520Representation%25255D%252520Housing%252520price%252520example%252520linear%252520regression.png 
+  [10]: https://lh6.googleusercontent.com/-gSODDORlRdU/U9LqlbJuVkI/AAAAAAAAALk/VzL4mEl_64g/s0/%25255B2%25255D%25255BModel%252520Representation%25255D%252520Housing%252520price%252520example%252520linear%252520regression.png
+  [11]: https://lh3.googleusercontent.com/-cIuXcTJR1qg/U-KnO1dZAwI/AAAAAAAAAS8/T_BLht2h8vQ/s0/%25255B2%25255D%25255BModel%252520Representation%25255D%252520Training%252520data%252520notation.png
+  [12]: https://lh5.googleusercontent.com/-La2gID6RL2c/U-Kplsd4swI/AAAAAAAAATI/UlgQDEejGQM/s0/%25255B2%25255D%25255BModel%252520Representation%25255D%252520How%252520a%252520supervised%252520learning%252520algorithm%252520works.png
+  [13]: https://lh3.googleusercontent.com/-uQaMUsjMaTw/U-Ky5U8rPyI/AAAAAAAAATU/IJVD6U-MX2U/s0/%25255B2%25255D%25255BCost%252520Function%25255D%252520linear%252520functions%25252C%252520with%252520respect%252520to%252520theta%2525201%252520and%252520theta%2525202.png 
